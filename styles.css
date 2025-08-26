@@ -1,0 +1,86 @@
+
+    #map {
+      height: 100vh; /* el mapa ocupa toda la ventana */
+      width: 100%;
+    }
+	
+	    .coords-control {
+      background: white;
+      padding: 10px;
+      font-family: sans-serif;
+      font-size: 14px;
+      line-height: 1.4;
+      box-shadow: 0 0 6px rgba(0,0,0,0.3);
+    }
+    .coords-control input {
+      width: 120px;
+      margin-bottom: 4px;
+      font-size: 13px;
+    }
+	
+	/* styles.css o <style> dentro de <head> */
+#file-control {
+  background: white;
+  padding: 5px;
+  border-radius: 5px;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.3);
+}
+
+#file-control label {
+  font-size: 14px;
+  color: #333;
+}
+
+#file-control input[type="file"] {
+  display: none; /* lo ocultamos, solo se activa al clickar el label */
+}
+
+#file-control:hover {
+  background: #f0f0f0;
+}
+
+/* --- Listado de capas cargadas --- */
+.layers-list-control {
+  background: white;
+  padding: 6px;
+  border-radius: 4px;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.2);
+  font-size: 13px;
+  max-height: 150px;   /* límite si hay muchas capas */
+  overflow-y: auto;
+}
+
+.layers-list-control strong {
+  display: block;
+  margin-bottom: 4px;
+  font-size: 14px;
+}
+
+.layers-list-control div {
+  margin-bottom: 4px; /* separa un poco cada capa */
+}
+
+.layers-list-control label {
+  flex: 1;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis; /* asegura que nombres largos no descuadren */
+  cursor: pointer;
+}
+
+/* Botón eliminar */
+.layers-list-control .remove-btn {
+  background: transparent;
+  border: none;
+  color: #c00;
+  font-size: 14px;
+  cursor: pointer;
+  padding: 2px 5px;
+  border-radius: 3px;
+  transition: background 0.2s, color 0.2s;
+}
+
+.layers-list-control .remove-btn:hover {
+  background: #f8d7da;
+  color: #900;
+}

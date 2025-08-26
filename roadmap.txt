@@ -1,0 +1,23 @@
+| #  | Funcionalidad                                                        | Prioridad | Complejidad | Dependencias / Notas                                              |
+| -- | -------------------------------------------------------------------- | --------- | ----------- | ----------------------------------------------------------------- |
+| 1  | Mostrar listado de capas cargadas con posibilidad de ocultar/mostrar | Alta      | Media       | Basado en `L.control.layers`; útil para todas las capas dinámicas |
+| 2  | Editar o borrar capas dibujadas previamente                          | Alta      | Media       | Requiere `leaflet-draw` y `drawnItems`                            |
+| 3  | Guardar dibujo a GeoJSON o KML                                       | Alta      | Media       | Requiere `drawnItems`; KML necesita librería extra (`tokml`)      |
+| 4  | Cambiar color de capas individuales cargadas desde archivos          | Media     | Media       | Necesita guardar referencias a capas cargadas                     |
+| 5  | Añadir estilos avanzados (grosor, opacidad)                          | Media     | Media       | Se puede combinar con el control de color existente               |
+| 6  | Etiquetas o popups automáticos al dibujar (longitud, área)           | Media     | Media       | Usar `L.GeometryUtil` o `leaflet-measure`                         |
+| 7  | Añadir íconos personalizados para marcadores                         | Media     | Baja        | Usar `L.divIcon` o `L.icon`                                       |
+| 8  | Mostrar coordenadas al pasar el ratón                                | Baja      | Baja        | Puede ser un control flotante; no depende de otras funciones      |
+| 9  | Herramienta de medir distancia                                       | Media     | Media       | Plugin `leaflet-measure` o funcionalidad propia                   |
+| 10 | Herramienta de medir área                                            | Media     | Media       | Similar a medición de distancia; requiere polígonos               |
+| 11 | Mostrar longitud y altitud de rutas GPX                              | Media     | Media       | Requiere cargar rutas GPX; calcular stats de los puntos           |
+| 12 | Seguimiento GPS en tiempo real                                       | Baja      | Alta        | Usar `navigator.geolocation.watchPosition`; opcional              |
+| 13 | Popups dinámicos a rutas o puntos cargados                           | Media     | Media       | Usar `bindPopup` en `L.geoJSON` o `L.GPX`                         |
+| 14 | Añadir notas o comentarios sobre capas o marcadores                  | Media     | Media       | Puede ser un popup editable o panel lateral                       |
+| 15 | Exportar mapa completo a imagen o PDF                                | Baja      | Alta        | Librerías `leaflet-image` o `html2canvas + jsPDF`                 |
+| 16 | Exportar solo capas dibujadas o cargadas a GPX/KML/GeoJSON           | Alta      | Media       | Basado en `drawnItems.toGeoJSON()`; requiere librería para KML    |
+| 17 | Guardar y cargar sesiones (capas y dibujos)                          | Media     | Media-Alta  | LocalStorage o IndexedDB; depende de exportación y carga de capas |
+
+
+💡 Sugerencia de orden de implementación:
+1 → 2 → 3 → 4 → 5 → 6 → 7 → 9 → 10 → 11 → 13 → 14 → 16 → 17 → 8 → 12 → 15
