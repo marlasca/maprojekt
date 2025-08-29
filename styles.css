@@ -103,11 +103,14 @@
   padding: 6px 10px;
   cursor: pointer;
   font-size: 20px;
+  display: none; /* por defecto oculto en escritorio */
 }
 
-/* Cuando ocultamos controles */
-.leaflet-right.hidden {
-  display: none !important;
+/* Solo visible en móvil */
+@media (max-width: 768px) {
+  #toggle-controls {
+    display: block;
+  }
 }
 
 

@@ -193,7 +193,12 @@ function addLayerToList(layer, name) {
   });
 }
 
+// JS para ocultar/mostrar controles solo en móvil
 document.getElementById("toggle-controls").addEventListener("click", () => {
-  const rightControls = document.querySelector(".leaflet-right");
-  rightControls.classList.toggle("hidden");
+  if (window.innerWidth <= 768) { // solo aplica en móvil
+    document.querySelectorAll(".leaflet-right").forEach(el => {
+      el.style.display = (el.style.display === "none" ? "" : "none");
+    });
+  }
 });
+
