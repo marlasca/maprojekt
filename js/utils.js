@@ -192,3 +192,8 @@ function addLayerToList(layer, name) {
 	listDiv.removeChild(item);
   });
 }
+
+document.getElementById("toggle-controls").addEventListener("click", () => {
+  const rightControls = document.querySelector(".leaflet-right");
+  rightControls.classList.toggle("hidden");
+});

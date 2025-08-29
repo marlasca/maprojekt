@@ -84,3 +84,31 @@
   background: #f8d7da;
   color: #900;
 }
+
+/* Ocultar menú en escritorio */
+#menu-toggle,
+#menu-panel {
+  display: none;
+}
+
+/* Botón flotante arriba a la derecha */
+#toggle-controls {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  z-index: 2000;
+  background: white;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  padding: 6px 10px;
+  cursor: pointer;
+  font-size: 20px;
+}
+
+/* Cuando ocultamos controles */
+.leaflet-right.hidden {
+  display: none !important;
+}
+
+
+
