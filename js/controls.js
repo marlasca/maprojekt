@@ -128,6 +128,7 @@ const ImportControl = L.Control.extend({
             const geojson = this.toGeoJSON();
             const layer = processGeoJSON(geojson);
             addLayerToList(layer, file.name);
+			saveToLocalStorage();
           });
 
         } else if (name.endsWith(".kml")) {
@@ -137,6 +138,7 @@ const ImportControl = L.Control.extend({
             const geojson = this.toGeoJSON();
             const layer = processGeoJSON(geojson);
             addLayerToList(layer, file.name);
+			saveToLocalStorage();
           });
 
         } else if (name.endsWith(".gpx")) {
@@ -146,6 +148,7 @@ const ImportControl = L.Control.extend({
             const geojson = evt.target.toGeoJSON();
             const layer = processGeoJSON(geojson);
             addLayerToList(layer, file.name);
+			saveToLocalStorage();
           });
 
         } else if (name.endsWith(".geojson") || name.endsWith(".json")) {
@@ -156,6 +159,7 @@ const ImportControl = L.Control.extend({
             map.fitBounds(layer.getBounds());
           }
           addLayerToList(layer, file.name);
+		  saveToLocalStorage();
 
         } else {
           alert("Formato no soportado. Usa GPX, KML/KMZ o GeoJSON");

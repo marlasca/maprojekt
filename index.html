@@ -39,7 +39,16 @@
   <script src="js/utils.js"></script>
   <script src="js/app.js"></script>
   <script src="js/drawHandlers.js"></script>
+  <script src="js/localStorage.js"></script>
   <script src="js/controls.js"></script>
-  
+  <script>
+	// --- Autoguardado de dibujos ---
+	map.on(L.Draw.Event.CREATED, saveToLocalStorage);
+	map.on(L.Draw.Event.EDITED, saveToLocalStorage);
+	map.on(L.Draw.Event.DELETED, saveToLocalStorage);
+
+	// Restaurar al iniciar
+	restoreFromLocalStorage();
+  </script>
 </body>
 </html>
