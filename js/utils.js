@@ -1,3 +1,6 @@
+
+    // --- Leaflet.draw ---
+    const drawnItems = new L.FeatureGroup();
 function processGeoJSON(data) {
   const geoLayer = L.geoJSON(data, {
 	pointToLayer: function (feature, latlng) {
@@ -202,4 +205,68 @@ document.getElementById("toggle-controls").addEventListener("click", () => {
   }
 });
 
+// --- Guardar sesión en enlace compartible ---
+function saveSessionToUrl() {
+  const session = {
+    drawn: drawnItems.toGeoJSON(),
+    loaded: {
+      type: "FeatureCollection",
+      features: []
+    }
+  };
+
+  // Exportar capas cargadas
+  loadedLayers.eachLayer(layer => {
+    if (layer.toGeoJSON) {
+      const geojson = layer.toGeoJSON();
+      if (geojson.type === "FeatureCollection") {
+        session.loaded.features.push(...geojson.features);
+      } else {
+        session.loaded.features.push(geojson);
+      }
+    }
+  });
+
+  // Comprimir y generar enlace
+  const json = JSON.stringify(session);
+  const compressed = LZString.compressToEncodedURIComponent(json);
+  const url = `${window.location.origin}${window.location.pathname}#session=${compressed}`;
+  
+  navigator.clipboard.writeText(url).then(() => {
+    alert("🔗 Enlace de sesión copiado al portapapeles");
+  });
+}
+
+// --- Restaurar sesión desde la URL ---
+function restoreFromUrl() {
+  const hash = window.location.hash;
+  if (hash.startsWith("#session=")) {
+    try {
+      const compressed = hash.replace("#session=", "");
+      const json = LZString.decompressFromEncodedURIComponent(compressed);
+      const session = JSON.parse(json);
+
+      // Restaurar dibujos
+      if (session.drawn) {
+        L.geoJSON(session.drawn, {
+          onEachFeature: (feature, layer) => {
+            processGeoJSON({ type: "FeatureCollection", features: [feature] });
+          }
+        });
+      }
+
+      // Restaurar capas cargadas
+      if (session.loaded) {
+        L.geoJSON(session.loaded, {
+          onEachFeature: (feature, layer) => {
+            processGeoJSON({ type: "FeatureCollection", features: [feature] });
+          }
+        });
+      }
+
+    } catch (err) {
+      console.error("Error restaurando sesión:", err);
+    }
+  }
+}
 

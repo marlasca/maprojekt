@@ -216,3 +216,22 @@ let currentIconKey = "pin";
 document.getElementById("iconSelector").addEventListener("change", function(e) {
   currentIconKey = e.target.value;
 });
+
+const ShareControl = L.Control.extend({
+  onAdd: function () {
+    const div = L.DomUtil.create("div", "leaflet-control leaflet-bar");
+    const btn = L.DomUtil.create("a", "", div);
+    btn.innerHTML = "??";
+    btn.href = "#";
+    btn.title = "Compartir sesión";
+
+    L.DomEvent.on(btn, "click", function (e) {
+      L.DomEvent.preventDefault(e);
+      saveSessionToUrl();
+    });
+
+    return div;
+  }
+});
+
+map.addControl(new ShareControl({ position: "topleft" }));

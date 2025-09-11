@@ -12,8 +12,6 @@
     });
     map.addControl(new ColorControl({ position: 'topright' }));
 
-    // --- Leaflet.draw ---
-    const drawnItems = new L.FeatureGroup();
     map.addLayer(drawnItems);
 
     function createDrawControl(color) {
