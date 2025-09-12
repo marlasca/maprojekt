@@ -10,24 +10,27 @@ function saveToLocalStorage() {
 
 
 function restoreFromLocalStorage() {
-  const saved = localStorage.getItem("mapSession");
-  if (!saved) return;
+  const hash = window.location.hash;
+  if (!hash.startsWith("#session=")) {
+	  const saved = localStorage.getItem("mapSession");
+	  if (!saved) return;
 
-  try {
-    const data = JSON.parse(saved);
-    if (data && data.type === "FeatureCollection") {
-      // Limpia lo actual (opcional, pero recomendable)
-      drawnItems.clearLayers();
-      loadedLayers.clearLayers();
+	  try {
+		const data = JSON.parse(saved);
+		if (data && data.type === "FeatureCollection") {
+		  // Limpia lo actual (opcional, pero recomendable)
+		  drawnItems.clearLayers();
+		  loadedLayers.clearLayers();
 
-      const geoLayer = processGeoJSON(data); // tu función actual
-      if (geoLayer.getBounds && geoLayer.getBounds().isValid()) {
-        map.fitBounds(geoLayer.getBounds());
-      }
-      console.log("✅ Sesión restaurada desde localStorage");
-    }
-  } catch (err) {
-    console.error("❌ Error restaurando sesión:", err);
+		  const geoLayer = processGeoJSON(data); // tu función actual
+		  if (geoLayer.getBounds && geoLayer.getBounds().isValid()) {
+			map.fitBounds(geoLayer.getBounds());
+		  }
+		  console.log("✅ Sesión restaurada desde localStorage");
+		}
+	  } catch (err) {
+		console.error("❌ Error restaurando sesión:", err);
+	  }
   }
 }
 
