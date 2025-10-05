@@ -221,7 +221,7 @@ const ShareControl = L.Control.extend({
   onAdd: function () {
     const div = L.DomUtil.create("div", "leaflet-control leaflet-bar");
     const btn = L.DomUtil.create("a", "", div);
-    btn.innerHTML = "??";
+    btn.innerHTML = '<i class="fas fa-link" style="font-size:12px; color:black;"></i>';
     btn.href = "#";
     btn.title = "Compartir sesión";
 
@@ -235,3 +235,24 @@ const ShareControl = L.Control.extend({
 });
 
 map.addControl(new ShareControl({ position: "topleft" }));
+
+
+// Crear un control personalizado
+const TrackControl = L.Control.extend({
+  onAdd: function(map) {
+	const div = L.DomUtil.create("div", "leaflet-control custom-control");
+	div.innerHTML = `
+	  <input id="garminUrl" type="text" placeholder="URL Garmin" /><br/>
+	  <input id="trackLabel" type="text" placeholder="Etiqueta" /><br/>
+	  <button id="loadTrack">Cargar Track</button>
+	`;
+
+	// Evitar que el mapa se mueva al hacer scroll/click sobre el control
+	L.DomEvent.disableClickPropagation(div);
+
+	return div;
+  }
+});
+
+map.addControl(new TrackControl({ position: "topright" }));
+

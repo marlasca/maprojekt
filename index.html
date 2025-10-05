@@ -44,6 +44,7 @@
   <script src="js/drawHandlers.js"></script>
   <script src="js/localStorage.js"></script>
   <script src="js/controls.js"></script>
+  <script src="js/livetrack.js"></script>
   <script>
 	// --- Autoguardado de dibujos ---
 	map.on(L.Draw.Event.CREATED, saveToLocalStorage);
@@ -53,6 +54,7 @@
 	// Restaurar al iniciar
 	restoreFromLocalStorage();
 	restoreFromUrl();
+
 	</script>
 </body>
 </html>

@@ -192,6 +192,9 @@ function addLayerToList(layer, name) {
 
   item.querySelector(".remove-btn").addEventListener("click", function() {
 	loadedLayers.removeLayer(layer);
+  if (autoUpdateInterval) {
+	clearInterval(autoUpdateInterval);
+  }
 	listDiv.removeChild(item);
   });
 }
@@ -269,4 +272,5 @@ function restoreFromUrl() {
     }
   }
 }
+
 
