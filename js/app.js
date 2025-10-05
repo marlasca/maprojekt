@@ -18,6 +18,22 @@
       zoom: 13,
       layers: [osm]
     });
+	// Intentar obtener la ubicación del usuario
+	map.locate({ setView: true, maxZoom: 16 });
+
+	// Cuando se obtiene la ubicación con éxito
+	map.on('locationfound', (e) => {
+	  const radius = e.accuracy / 2;
+
+	  // Marcador en la posición actual
+	  L.marker(e.latlng)
+		.addTo(map)
+		.bindPopup(`Estás a ${Math.round(radius)} metros de este punto.`)
+		.openPopup();
+
+	  // Círculo de precisión
+	  L.circle(e.latlng, radius).addTo(map);
+	});
 
     // --- Control de capas ---
     const baseMaps = {
