@@ -1,5 +1,5 @@
 
-const proxyUrl = "`/track?url=`";
+const proxyUrl = "https://maprojekt.onrender.com/track?url=";
     let currentPolyline = null;
     let autoUpdateInterval = null;
     let allCoords = []; // acumulador de coordenadas
