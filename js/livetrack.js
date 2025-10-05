@@ -1,5 +1,5 @@
 
-const proxyUrl = "http://localhost:3000/track?url=";
+const proxyUrl = "`/track?url=`";
     let currentPolyline = null;
     let autoUpdateInterval = null;
     let allCoords = []; // acumulador de coordenadas
