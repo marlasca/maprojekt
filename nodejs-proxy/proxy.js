@@ -21,20 +21,18 @@ app.get("/track", async (req, res) => {
 
   console.log(`🌍 Abriendo LiveTrack: ${url}`);
 
+ 
   let browser;
   try {
+
     browser = await puppeteer.launch({
-      headless: true,
-      executablePath: puppeteer.executablePath(), // ?? usa el binario propio
-      args: [
-        "--no-sandbox",
-        "--disable-setuid-sandbox",
-        "--disable-dev-shm-usage",
-        "--disable-gpu",
-        "--no-zygote",
-        "--single-process",
-      ],
-    });
+	  headless: true,
+	  executablePath: await puppeteer
+		.launch()
+		.then(b => b.process().spawnfile)
+		.catch(() => puppeteer.executablePath()),
+	  args: ["--no-sandbox", "--disable-setuid-sandbox"],
+	});
     const page = await browser.newPage();
 
     await page.setUserAgent(
